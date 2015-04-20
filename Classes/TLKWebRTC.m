@@ -13,7 +13,7 @@
 #import "RTCPair.h"
 #import "RTCMediaConstraints.h"
 #import "RTCSessionDescription.h"
-#import "RTCSessionDescriptonDelegate.h"
+#import "RTCSessionDescriptionDelegate.h"
 #import "RTCPeerConnectionDelegate.h"
 
 #import "RTCAudioTrack.h"
@@ -21,7 +21,7 @@
 #import "RTCVideoSource.h"
 #import "RTCVideoTrack.h"
 
-@interface TLKWebRTC () <RTCSessionDescriptonDelegate, RTCPeerConnectionDelegate>
+@interface TLKWebRTC () <RTCSessionDescriptionDelegate, RTCPeerConnectionDelegate>
 
 @property (readwrite, nonatomic) RTCMediaStream* localMediaStream;
 
@@ -97,7 +97,7 @@ NSString* const TLKPeerConnectionRoleReceiver = @"TLKPeerConnectionRoleReceiver"
 
 - (void)addPeerConnectionForID:(NSString*)identifier {
 	RTCPeerConnection* peer = [self.peerFactory peerConnectionWithICEServers:[self iceServers] constraints:[self mediaConstraints] delegate:self];
-    [peer addStream:self.localMediaStream constraints:[self mediaConstraints]];
+    [peer addStream:self.localMediaStream];
 	[self.peerConnections setObject:peer forKey:identifier];
 }
 
